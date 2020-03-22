@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        #map {
+            width: 1617px;
+            height: 834px;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/Linnentown_boundaryBoundary_1.js"></script>
+        <script src="data/linnentown_parcels_2.js"></script>
+        <script src="data/linnentown_buildings_3.js"></script>
+        <script src="data/clipped_streets_4.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[33.94579020112073,-83.38740120207736],[33.9536740416864,-83.37209783367165]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        var layer_Linnentown_0 = L.tileLayer('https://api.mapbox.com/styles/v1/jengallucci/ck73muwit0ztu1iqky6y9ncvr/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamVuZ2FsbHVjY2kiLCJhIjoiY2s2Y2tiemNmMWQxMjNocGJtMHp2cGt5aSJ9.JM83dA3Vw05Filx3nhMORw', {
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 18
+        });
+        layer_Linnentown_0;
+        map.addLayer(layer_Linnentown_0);
+        function pop_Linnentown_boundaryBoundary_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? Autolinker.link(feature.properties['fid'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Linnentown_boundaryBoundary_1_0() {
+            return {
+                pane: 'pane_Linnentown_boundaryBoundary_1',
+                opacity: 1,
+                color: 'rgba(96,96,96,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(190,207,80,0.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Linnentown_boundaryBoundary_1');
+        map.getPane('pane_Linnentown_boundaryBoundary_1').style.zIndex = 401;
+        map.getPane('pane_Linnentown_boundaryBoundary_1').style['mix-blend-mode'] = 'normal';
+        var layer_Linnentown_boundaryBoundary_1 = new L.geoJson(json_Linnentown_boundaryBoundary_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Linnentown_boundaryBoundary_1',
+            layerName: 'layer_Linnentown_boundaryBoundary_1',
+            pane: 'pane_Linnentown_boundaryBoundary_1',
+            onEachFeature: pop_Linnentown_boundaryBoundary_1,
+            style: style_Linnentown_boundaryBoundary_1_0,
+        });
+        bounds_group.addLayer(layer_Linnentown_boundaryBoundary_1);
+        map.addLayer(layer_Linnentown_boundaryBoundary_1);
+        function pop_linnentown_parcels_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">Parcel Number: ' + (feature.properties['parcel_num'] !== null ? Autolinker.link(feature.properties['parcel_num'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">Parcel Section: ' + (feature.properties['parcel_sec'] !== null ? Autolinker.link(feature.properties['parcel_sec'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">Resident: ' + (feature.properties['residents'] !== null ? Autolinker.link(feature.properties['residents'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_linnentown_parcels_2_0() {
+            return {
+                pane: 'pane_linnentown_parcels_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(229,182,54,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_linnentown_parcels_2');
+        map.getPane('pane_linnentown_parcels_2').style.zIndex = 402;
+        map.getPane('pane_linnentown_parcels_2').style['mix-blend-mode'] = 'normal';
+        var layer_linnentown_parcels_2 = new L.geoJson(json_linnentown_parcels_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_linnentown_parcels_2',
+            layerName: 'layer_linnentown_parcels_2',
+            pane: 'pane_linnentown_parcels_2',
+            onEachFeature: pop_linnentown_parcels_2,
+            style: style_linnentown_parcels_2_0,
+        });
+        bounds_group.addLayer(layer_linnentown_parcels_2);
+        map.addLayer(layer_linnentown_parcels_2);
+        function pop_linnentown_buildings_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? Autolinker.link(feature.properties['fid'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['parcel_num'] !== null ? Autolinker.link(feature.properties['parcel_num'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['parcel_sec'] !== null ? Autolinker.link(feature.properties['parcel_sec'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['parcel_id'] !== null ? Autolinker.link(feature.properties['parcel_id'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['bldg_num'] !== null ? Autolinker.link(feature.properties['bldg_num'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['owner'] !== null ? Autolinker.link(feature.properties['owner'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['race'] !== null ? Autolinker.link(feature.properties['race'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['status'] !== null ? Autolinker.link(feature.properties['status'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['date_acquired'] !== null ? Autolinker.link(feature.properties['date_acquired'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['date_moved'] !== null ? Autolinker.link(feature.properties['date_moved'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['parc_date'] !== null ? Autolinker.link(feature.properties['parc_date'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_linnentown_buildings_3_0() {
+            return {
+                pane: 'pane_linnentown_buildings_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(190,178,151,1.0)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_linnentown_buildings_3');
+        map.getPane('pane_linnentown_buildings_3').style.zIndex = 403;
+        map.getPane('pane_linnentown_buildings_3').style['mix-blend-mode'] = 'normal';
+        var layer_linnentown_buildings_3 = new L.geoJson(json_linnentown_buildings_3, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_linnentown_buildings_3',
+            layerName: 'layer_linnentown_buildings_3',
+            pane: 'pane_linnentown_buildings_3',
+            onEachFeature: pop_linnentown_buildings_3,
+            style: style_linnentown_buildings_3_0,
+        });
+        bounds_group.addLayer(layer_linnentown_buildings_3);
+        map.addLayer(layer_linnentown_buildings_3);
+        function pop_clipped_streets_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? Autolinker.link(feature.properties['fid'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Street Name'] !== null ? Autolinker.link(feature.properties['Street Name'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Source'] !== null ? Autolinker.link(feature.properties['Source'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['layer'] !== null ? Autolinker.link(feature.properties['layer'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['path'] !== null ? Autolinker.link(feature.properties['path'].toLocaleString(), {truncate: {length: 30, location: 'smart'}}) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_clipped_streets_4_0() {
+            return {
+                pane: 'pane_clipped_streets_4',
+                opacity: 1,
+                color: 'rgba(125,139,143,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+        }
+        map.createPane('pane_clipped_streets_4');
+        map.getPane('pane_clipped_streets_4').style.zIndex = 404;
+        map.getPane('pane_clipped_streets_4').style['mix-blend-mode'] = 'normal';
+        var layer_clipped_streets_4 = new L.geoJson(json_clipped_streets_4, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_clipped_streets_4',
+            layerName: 'layer_clipped_streets_4',
+            pane: 'pane_clipped_streets_4',
+            onEachFeature: pop_clipped_streets_4,
+            style: style_clipped_streets_4_0,
+        });
+        bounds_group.addLayer(layer_clipped_streets_4);
+        map.addLayer(layer_clipped_streets_4);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/clipped_streets_4.png" /> clipped_streets': layer_clipped_streets_4,'<img src="legend/linnentown_buildings_3.png" /> linnentown_buildings': layer_linnentown_buildings_3,'<img src="legend/linnentown_parcels_2.png" /> linnentown_parcels': layer_linnentown_parcels_2,'<img src="legend/Linnentown_boundaryBoundary_1.png" /> Linnentown_boundary Boundary': layer_Linnentown_boundaryBoundary_1,"Linnentown": layer_Linnentown_0,}).addTo(map);
+        setBounds();
+        </script>
+    </body>
+</html>
